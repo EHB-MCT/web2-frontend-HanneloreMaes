@@ -9,12 +9,11 @@ function getStarted(){
         let inputPlaces = document.getElementById("inputPlace").value;
         console.log('Plaats', inputPlaces);
         postInput(inputPlaces)
-        getData(inputPlaces);
     });
 }
 
 function postInput(inputPlaces){
-    fetch("https://team-jasmien.herokuapp.com/saveInputPlace", {
+    fetch(`https://sterrenkijker.herokuapp.com/saveInputPlace`, {
         method: 'POST',
         headers: header,                        // laat weten welke taal hij moet hebben en in welke taal hij communiceert
         body: JSON.stringify({
@@ -24,7 +23,14 @@ function postInput(inputPlaces){
     .then(response => response.json())
     .then(dataPost=> {
         console.log("Succes Post", dataPost)
-        run()
+    })
+}
+async function getInput(){
+    await fetch(`https://sterrenkijker.herokuapp.com/saveInputPlace`)
+    .then(response => response.json())
+    .then(dataGet =>{
+        console.log("Succes Get", dataGet)
+        getData(inputPlaces)
     })
 }
 
