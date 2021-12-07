@@ -8,8 +8,24 @@ function getStarted(){
         e.preventDefault();
         let inputPlaces = document.getElementById("inputPlace").value;
         console.log('Plaats', inputPlaces);
+        postInput(inputPlaces)
         getData(inputPlaces);
     });
+}
+
+function postInput(inputPlaces){
+    fetch("https://team-jasmien.herokuapp.com/saveChallenge", {
+        method: 'POST',
+        headers: header,                        // laat weten welke taal hij moet hebben en in welke taal hij communiceert
+        body: JSON.stringify({
+            input: inputPlaces
+        }),
+    })    
+    .then(response => response.json())
+    .then(dataPost=> {
+        console.log("Succes Post", dataPost)
+        run()
+    })
 }
 
 //ophalen van data voor lat en long van inputPlaces
@@ -55,7 +71,7 @@ function positionStarMap(data2){
 /* <!--eind https://virtualsky.lco.global/ --> */
 
 function getWeather(data2, inputPlaces){              
-    //console.log('succes data getWeather', data);                    // zien of data wordt overgezet en wordt ingeladen
+    //console.log('succes data getWeather', data);                   // zien of data wordt overgezet en wordt ingeladen
     let lat = data2.results[0].locations[0].displayLatLng.lat;       //ophalen data voor de latitude
     let lon = data2.results[0].locations[0].displayLatLng.lng;       // ophalen data voor de longitude
     
