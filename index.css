@@ -230,9 +230,11 @@ body{
 	/* display: flex;
 	align-content: flex-end; */
 	position: absolute;
+	z-index: 120;
 	right:0;
 	margin-bottom: 1%;
 	padding:0% 2% 1% 2% ;
+	padding-right: 1.2%;
 	background-color: rgba(0, 27, 44, 0.664);
 	border-radius: 10%;
 }
