@@ -1,0 +1,343 @@
+body{
+	margin: 0;
+	width: 100%;
+}
+* { 
+	font-family: Helvetica, sans-serif;
+	color: black;
+	font-size: 1em;
+}
+
+/***************************************/
+/***************************************/
+/*https://virtualsky.lco.global/  begin*/
+/***************************************/
+/***************************************/
+#overlay {
+	position: fixed;
+	display: none;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0,0,0,0.5);
+	z-index: 2;
+	cursor: pointer;
+}
+#headerMap {
+	overflow-x: hidden;
+	position: relative;
+	display: flex;
+	z-index: -1;
+	height: 100vh;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+#starmapper { 
+	overflow: hidden; 
+	z-index: 1;
+    height: 100%;
+    width:100%; 
+    position: relative;
+}
+#virtualskyinfobox{
+	font-size: 12px;
+	display:none;
+	background-color:rgba(200,200,200,1);
+	color:black;
+	padding:5px;
+	max-width:150px;
+	border-radius:0.5em;
+	-moz-border-radius: 0.5em;
+	-webkit-border-radius: 0.5em;
+	box-shadow:0px 0px 20px rgba(255,255,255,0.5);
+	-moz-box-shadow:0px 0px 20px rgba(255,255,255,0.5);
+	-webkit-box-shadow:0px 0px 20px rgba(255,255,255,0.5);
+}
+.virtualskyinfocredit {
+	font-size:0.5em;
+	float:left;
+	position:relative;
+	padding:5px;
+	color: white;
+}
+#virtualskyinfobox img { 
+	width: 128px; 
+    height: 128px; 
+}
+/***************************************/
+/***************************************/
+/*https://virtualsky.lco.global/  eind*/
+/***************************************/
+/***************************************/
+
+
+
+/***************************************/
+/***************************************/
+/*Weather begin*/
+/***************************************/
+/***************************************/
+#mainMap{
+	position: absolute;
+	overflow-y: scroll;
+	z-index: 100;
+	top: 0px;
+	margin:0;
+	padding: 0;
+	width: 100%;
+	height: 100vh;
+}
+#containerForm{
+	display: flex;
+	justify-content: flex-end;
+	margin: 0px;
+	padding: 0px;
+	margin: 1% 5% 1% 0%;
+}
+#inputPlace{
+	top: 0%;
+}
+
+#containerMenu{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+}
+#columnText{
+	margin-bottom: 10%;
+}
+
+/*******************/
+/*Menu Left  begin*/
+/*******************/
+#containerWeatherConditionLeft{
+	display: flex;
+	flex-direction: column;
+}
+#containerInfoLeft{
+	display: flex;
+	flex-direction: row;
+	align-items: baseline;
+	justify-content: space-around;
+	margin: 10px 15px 0px 15px;
+}
+#current-time{
+	color: white;
+	font-size: 60pt;
+	margin: 0px;
+}
+#current-inputplace{
+	font-size: 28px;
+	color: white;
+	top: 0%;
+}
+#weatherLeftMenu{
+	z-index: 10;
+	position: fixed;
+	color: white;
+	margin-left: 2%;
+	bottom: 0px;
+}
+#weatherLeftMenuBlock{
+	display: flex;
+	flex-direction: column;
+	align-content: flex-end;
+	position: absolute;
+	bottom:0;
+	margin-bottom: 1%;
+	background-color: rgba(0, 27, 44, 0.664);
+	border-radius: 10%;
+}
+#conditionWeatherLeft{
+	color: white;
+	display: flex;
+	flex-direction: row;
+	justify-content:space-evenly;
+	align-items: baseline;
+}
+#weatherConditionNameLeft{
+	color: white;
+	margin: 0px;
+}
+#temperatureLeft{
+	color: white;
+	margin: 0px;
+	font-size: 40px;
+}
+.iconWeatherLeft{
+	width: 80%;
+	height: auto;
+	margin: 0px;
+}
+
+
+/*******************/
+/*Menu Right  begin*/
+/*******************/
+
+#weatherRightMenu{
+	right: 0px;
+	z-index: 2;
+	margin-right: 2%;
+}
+#weatherRightMenuBlock{
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	overflow-y: hidden;
+	background-color: rgba(0, 27, 44, 0.664);
+	border-radius: 10%;
+	padding-right: 1.2%;
+	margin-bottom: 3%;
+}
+#clock{
+	color: white;
+	font-size: 40px;
+}
+#weatherConditionName, #temperature{
+	color: white;
+	font-size: 16pt;
+}
+#weatherConditionName{
+	display: inline;
+}
+
+.iconWeather{
+	width: 200px;
+  	height: auto;
+	padding-right: 2%;
+}
+#conditionWeather{
+	display: flex;
+	flex-direction: row;
+	justify-content:space-evenly;
+}
+#columnText{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+
+/***************************/
+/*Menu Nearest Place  begin*/
+/***************************/
+#placeToSeeStars{
+	/* display: flex;
+	align-content: flex-end; */
+	position: absolute;
+	right:0;
+	margin-bottom: 1%;
+	padding:0% 2% 1% 2% ;
+	background-color: rgba(0, 27, 44, 0.664);
+	border-radius: 10%;
+}
+#nearestPlace{
+	font-size: 25px;
+	color: white;
+}
+#locatieTimeNearest{
+	display: flex;
+	flex-direction: row;
+	align-items: baseline;
+}
+#locationNearbyCity{
+	font-size: 25px;
+	color: white;
+	top: 0%;
+	margin-right: 2%;
+}
+#clockNearest{
+	color: white;
+	font-size: 13px;
+	margin: 0px;
+}
+#containerWeatherNearestTime{
+	display: flex;
+	flex-direction: row;
+}
+#temperatureNearest{
+	color: white;
+	margin: 0px;
+	font-size: 40px;
+}
+#conditionWeatherNearest{
+	display: flex;
+	flex-direction: column;
+	margin: 10px 15px 0px 15px;
+}
+#weatherConditionNameNearest{
+	color: white;
+	margin: 0px;
+}
+.iconWeatherNearest{
+	width: 80%;
+	height: auto;
+	margin: 0px;
+}
+#columnTextNearest{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+#ContainerAllInfoNearest{
+	padding-left: 10%;
+}
+
+/***************************************/
+/*https://www.sliderrevolution.com/resources/css-arrow/  begin*/
+/*Author: Carlo Flores*/
+/***************************************/
+
+.arrow {
+	background: #fff;
+	height: 3px;
+	width: 30px;
+	margin: 0 auto;
+	position: relative;
+	cursor: pointer;
+}
+.arrow:before, .arrow:after {
+	content: "";
+	background: #fff;
+	position: absolute;
+	height: 3px;
+	width: 15px;
+}
+.arrow:before {
+	right: -3px;
+	bottom: -4px;
+	transform: rotate(-45deg);
+}
+.arrow:after {
+	right: -3px;
+	top: -4px;
+	transform: rotate(45deg);
+}
+/***************************************/
+/*https://www.sliderrevolution.com/resources/css-arrow/  eind*/
+/*Author: Carlo Flores*/
+/***************************************/
+
+
+
+/*******************/
+/*Scrollbar*********/
+/*******************/
+::-webkit-scrollbar{
+	width: 10px;
+}
+::-webkit-scrollbar-thumb {
+	background: gray;
+	border-radius: 15px;
+}
+
+/***************************************/
+/***************************************/
+/*Weather begin*/
+/***************************************/
+/***************************************/

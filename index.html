@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Eindwerk Hannelore</title>
+        <link rel="stylesheet" href="./index.css">
+        
+    </head>
+    <body>
+        
+        <section id="headerMap">
+            <div id="starmapper"></div>
+        </section>
+
+        <section id="mainMap">
+
+            <div id="containerForm">
+                <form id="searchform"> 
+                    <input type="text" class="form-control" id="inputPlace" placeholder="Antwerp, Brussels, ...">
+                    <button type="submit" id="btn">Search</button>
+                </form>
+            </div>
+            
+            <div id="for">
+                <div id="placeToSeeStars">
+                </div>
+
+                <div id="weatherLeftMenu">
+                </div>
+
+                <div id="containerMenu">
+                    <div id="weatherRightMenu">
+                    </div>
+                </div>
+            </div>
+
+            
+        </section>
+
+        <!-- scriptfiles -->
+        <!--https://virtualsky.lco.global/ begin-->
+        <!--[if IE]><script src="excanvas.min.js"></script><![endif]-->
+        <script src="./VirtualSky/VirtualSky-gh-pages/stuquery.min.js"></script>
+        <script src="./VirtualSky/VirtualSky-gh-pages/virtualsky.js" type="module"></script>
+        <script src="./VirtualSky/VirtualSky-gh-pages/geo/virtualsky-geo.js" type="module"></script>
+        <!-- <script type="module" src="./js/planetarium.js"></script> -->
+        <!--https://virtualsky.lco.global/ eind-->
+        <script src="./js/index.js" type="module"></script>
+        <!-- einde scriptfiles -->
+    </body>
+</html>
