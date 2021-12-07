@@ -14,7 +14,7 @@ function getStarted(){
 }
 
 function postInput(inputPlaces){
-    fetch("https://team-jasmien.herokuapp.com/saveChallenge", {
+    fetch("https://team-jasmien.herokuapp.com/saveInputPlace", {
         method: 'POST',
         headers: header,                        // laat weten welke taal hij moet hebben en in welke taal hij communiceert
         body: JSON.stringify({
