@@ -7,21 +7,23 @@ function getStarted(){
     submitForm.addEventListener("submit", e => {
         e.preventDefault();
         let inputPlaces = document.getElementById("inputPlace").value;
-        console.log('Plaats', inputPlaces);
         postInput(inputPlaces)
     });
 }
 
 function postInput(inputPlaces){
-    let header = new Headers()
-    header.append("Content-Type", "application/json")
-    fetch(`https://sterrenkijker.herokuapp.com/saveInputPlace`, {
+    console.log('Plaats', inputPlaces);
+    
+    let header = new Headers();
+    header.append("Content-Type", "application/json");
+
+    fetch("https://sterrenkijker.herokuapp.com/saveInputPlace", {
         method: 'POST',
         headers: header,                        // laat weten welke taal hij moet hebben en in welke taal hij communiceert
         body: JSON.stringify({
             input: inputPlaces
         }),
-    })    
+    }) 
     .then(response => response.json())
     .then(dataPost=> {
         console.log("Succes Post", dataPost)
