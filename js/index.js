@@ -41,7 +41,6 @@ function getData(inputPlaces){
     fetch(`http://www.mapquestapi.com/geocoding/v1/address?key=y9jdsRhSBmSiVS7TFBcWCAsH6r9Xg90c&location=${inputPlaces}`)
     .then(response => response.json())
     .then(data2 => {
-        //console.log('succes data fetch getData', data);
         positionStarMap(data2);
         getWeather(data2, inputPlaces);                                // doorgeven van data naar getWeather functie
                                                                       // Beter niet boven in window.onload function -> anders wordt het 2x uitgevoerd

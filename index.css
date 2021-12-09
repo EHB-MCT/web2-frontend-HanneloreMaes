@@ -227,8 +227,6 @@ body{
 /*Menu Nearest Place  begin*/
 /***************************/
 #placeToSeeStars{
-	/* display: flex;
-	align-content: flex-end; */
 	position: absolute;
 	z-index: 120;
 	right:0;
