@@ -27,16 +27,18 @@ function postInput(inputPlaces){
     .then(response => response.json())
     .then(dataPost=> {
         console.log("Succes Post", dataPost)
+        getInput(inputPlaces)
     })
 }
-// async function getInput(){
-//     await fetch(`https://sterrenkijker.herokuapp.com/saveInputPlace`)
-//     .then(response => response.json())
-//     .then(dataGet =>{
-//         console.log("Succes Get", dataGet)
-//         getData(inputPlaces)
-//     })
-// }
+
+async function getInput(inputPlaces){
+    await fetch(`https://sterrenkijker.herokuapp.com/inputPlace`)
+    .then(response => response.json())
+    .then(dataGet =>{
+        console.log("Succes Get", dataGet)
+        getData(inputPlaces)
+    })
+}
 
 //ophalen van data voor lat en long van inputPlaces
 function getData(inputPlaces){
@@ -44,7 +46,7 @@ function getData(inputPlaces){
     .then(response => response.json())
     .then(data2 => {
         positionStarMap(data2);
-        getWeather(data2, inputPlaces);                                // doorgeven van data naar getWeather functie
+        getWeather(data2, inputPlaces);                               // doorgeven van data naar getWeather functie
                                                                       // Beter niet boven in window.onload function -> anders wordt het 2x uitgevoerd
 
     })
@@ -53,29 +55,31 @@ function getData(inputPlaces){
 /* <!--begin https://virtualsky.lco.global/ --> */
 let planetarium;
 function positionStarMap(data2){
-    let latitude = data2.results[0].locations[0].displayLatLng.lat;
-    let longitude =data2.results[0].locations[0].displayLatLng.lng;
-    console.log('Lat, Long', latitude, longitude);
-    S(document).ready(function() {
-        planetarium = S.virtualsky({
-            'id': 'starmapper',
-            'clock': false,
-            'projection': 'stereo',
-            'latitude': latitude,
-            'longitude': longitude,
-            'ground': true,
-            'gradient': true,
-            'constellations': true,
-            'constellationlabels': true,
-            'showplanets': true,
-            'showplanetslabels': true,
-            'showstars': true,
-            'showstarlabels': true,
-            'gridlines_az': true,
-            'live': true,
-            'showposition': true
+    if(data2 != null){
+        let latitude = data2.results[0].locations[0].displayLatLng.lat;
+        let longitude =data2.results[0].locations[0].displayLatLng.lng;
+        console.log('Lat, Long', latitude, longitude);
+        S(document).ready(function() {
+            planetarium = S.virtualsky({
+                'id': 'starmapper',
+                'clock': false,
+                'projection': 'stereo',
+                'latitude': latitude,
+                'longitude': longitude,
+                'ground': true,
+                'gradient': true,
+                'constellations': true,
+                'constellationlabels': true,
+                'showplanets': true,
+                'showplanetslabels': true,
+                'showstars': true,
+                'showstarlabels': true,
+                'gridlines_az': true,
+                'live': true,
+                'showposition': true
+            });
         });
-    });
+    }
 }
 /* <!--eind https://virtualsky.lco.global/ --> */
 
