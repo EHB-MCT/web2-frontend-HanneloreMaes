@@ -7,6 +7,10 @@ body{
 	color: black;
 	font-size: 1em;
 }
+div{
+	margin:0;
+	padding:0;
+}
 
 /***************************************/
 /***************************************/
@@ -96,10 +100,17 @@ body{
 	justify-content: flex-end;
 	margin: 0px;
 	padding: 0px;
-	margin: 1% 5% 1% 0%;
+	margin: 1% 2% 1% 0%;
+	
 }
 #inputPlace{
 	top: 0%;
+	margin: 0% 7% 0% -47%;
+	padding-right: 20%;
+}
+
+#btn{
+	padding: 0% 10%;
 }
 
 #containerMenu{
@@ -109,6 +120,9 @@ body{
 }
 #columnText{
 	margin-bottom: 10%;
+}
+#for{
+	position: relative;
 }
 
 /*******************/
@@ -123,7 +137,7 @@ body{
 	flex-direction: row;
 	align-items: baseline;
 	justify-content: space-around;
-	margin: 10px 15px 0px 15px;
+	margin: 0.625em 0.9375em 0px 0.9375em;
 }
 #current-time{
 	color: white;
@@ -131,7 +145,7 @@ body{
 	margin: 0px;
 }
 #current-inputplace{
-	font-size: 28px;
+	font-size: 21pt;
 	color: white;
 	top: 0%;
 }
@@ -166,7 +180,7 @@ body{
 #temperatureLeft{
 	color: white;
 	margin: 0px;
-	font-size: 40px;
+	font-size: 30pt;
 }
 .iconWeatherLeft{
 	width: 80%;
@@ -182,7 +196,6 @@ body{
 #weatherRightMenu{
 	right: 0px;
 	z-index: 2;
-	margin-right: 2%;
 }
 #weatherRightMenuBlock{
 	display: flex;
@@ -190,13 +203,13 @@ body{
 	align-items: center;
 	overflow-y: hidden;
 	background-color: rgba(0, 27, 44, 0.664);
-	border-radius: 10%;
+	border-radius: 12%;
 	padding-right: 1.2%;
-	margin-bottom: 3%;
+	margin: 0% 9% 3% 1%;
 }
 #clock{
 	color: white;
-	font-size: 40px;
+	font-size: 30pt;
 }
 #weatherConditionName, #temperature{
 	color: white;
@@ -207,19 +220,21 @@ body{
 }
 
 .iconWeather{
-	width: 200px;
+	width: 150px;
   	height: auto;
 	padding-right: 2%;
 }
 #conditionWeather{
 	display: flex;
 	flex-direction: row;
+	flex-flow: nowrap;
 	justify-content:space-evenly;
 }
 #columnText{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	padding-right: 5%;
 }
 
 
@@ -227,18 +242,23 @@ body{
 /*Menu Nearest Place  begin*/
 /***************************/
 #placeToSeeStars{
-	position: absolute;
+	position: relative;
+	display: flex;
+	justify-content: flex-end;
 	z-index: 120;
+
+}
+#weatherNearestPlace{
 	right:0;
-	margin-bottom: 1%;
-	padding:0% 2% 1% 2% ;
-	padding-right: 1.2%;
+	margin:0% 2% 1%;
 	background-color: rgba(0, 27, 44, 0.664);
-	border-radius: 10%;
+	border-radius: 12%;
+	padding-left: 2.5%;
 }
 #nearestPlace{
-	font-size: 25px;
+	font-size: 19pt;
 	color: white;
+	padding: 0% 2%;
 }
 #locatieTimeNearest{
 	display: flex;
@@ -246,14 +266,14 @@ body{
 	align-items: baseline;
 }
 #locationNearbyCity{
-	font-size: 25px;
+	font-size: 19pt;
 	color: white;
 	top: 0%;
 	margin-right: 2%;
 }
 #clockNearest{
 	color: white;
-	font-size: 13px;
+	font-size: 10pt;
 	margin: 0px;
 }
 #containerWeatherNearestTime{
@@ -263,12 +283,13 @@ body{
 #temperatureNearest{
 	color: white;
 	margin: 0px;
-	font-size: 40px;
+	font-size: 30pt;
 }
 #conditionWeatherNearest{
 	display: flex;
 	flex-direction: column;
-	margin: 10px 15px 0px 15px;
+	margin: 0.625em 0.9375em 0px 0.9375em;
+	padding-bottom: 4%;
 }
 #weatherConditionNameNearest{
 	color: white;

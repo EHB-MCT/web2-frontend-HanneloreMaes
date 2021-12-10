@@ -114,7 +114,6 @@ function getWeather(data2, inputPlaces){
                             <p id="temperature">${data.current.temp}°C</pv>
                             <div id="conditionWeatherNearest">
                                 <img class="iconWeatherNearest" src="http://openweathermap.org/img/wn/${data.current.weather[0].icon}.png" alt="icon-weather-condition">
-                                &nbsp; 
                                 <p id="weatherConditionNameNearest">${data.current.weather[0].description}</p>
                             </div>
                             <div class="arrow"></div>
@@ -159,7 +158,7 @@ function getWeather(data2, inputPlaces){
                         <p id="clock">${formattedTime2}</p>
                         <div id="conditionWeather">
                             <p id="temperature">${weather.temp}°C</pv>
-                            &nbsp; 
+                            &nbsp; &nbsp;
                             <p id="weatherConditionName">${weather.weather[0].description}</p>
                         </div>
                     </div>
