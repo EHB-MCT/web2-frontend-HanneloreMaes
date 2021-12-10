@@ -7,19 +7,11 @@ function getStarted(){
     submitForm.addEventListener("submit", e => {
         e.preventDefault();
         let inputPlaces = document.getElementById("inputPlace").value;
+        getData(inputPlaces)
         postInput(inputPlaces);
     });
 }
 
-// function testAPi(data2){
-//     let lat1 = data2.results[0].locations[0].displayLatLng.lat;
-//     let lon1 =data2.results[0].locations[0].displayLatLng.lng;
-//     fetch(`api.openweathermap.org/data/2.5/onecall?lat=30.489772&lon=-99.771335&units=imperial`)
-//     .then(response => response.json())
-//     .then(test => {
-//         console.log("test api", test);
-//     })
-// }
 
 function postInput(inputPlaces){
     console.log('Plaats', inputPlaces);
@@ -46,7 +38,6 @@ async function getInput(inputPlaces){
     .then(response => response.json())
     .then(dataGet =>{
         console.log("Succes Get", dataGet)
-        getData(inputPlaces)
     })
 }
 
