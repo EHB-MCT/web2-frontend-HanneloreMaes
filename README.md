@@ -11,3 +11,9 @@ Hieronder vind je de sources die ik gebruikt heb voor dit project:
 3.  Css voor de pijl:
         sliderrevolution.com    author: Carlo Flores
         https://www.sliderrevolution.com/resources/css-arrow/
+
+4. Aanmaken van dynamische tijd:
+        Youtube                 author: Asish Greorge Tech
+        https://www.youtube.com/watch?v=6trGQWzg2AI
+
+        
