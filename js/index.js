@@ -7,9 +7,19 @@ function getStarted(){
     submitForm.addEventListener("submit", e => {
         e.preventDefault();
         let inputPlaces = document.getElementById("inputPlace").value;
-        postInput(inputPlaces)
+        postInput(inputPlaces);
     });
 }
+
+// function testAPi(data2){
+//     let lat1 = data2.results[0].locations[0].displayLatLng.lat;
+//     let lon1 =data2.results[0].locations[0].displayLatLng.lng;
+//     fetch(`api.openweathermap.org/data/2.5/onecall?lat=30.489772&lon=-99.771335&units=imperial`)
+//     .then(response => response.json())
+//     .then(test => {
+//         console.log("test api", test);
+//     })
+// }
 
 function postInput(inputPlaces){
     console.log('Plaats', inputPlaces);
@@ -45,6 +55,7 @@ function getData(inputPlaces){
     fetch(`http://www.mapquestapi.com/geocoding/v1/address?key=y9jdsRhSBmSiVS7TFBcWCAsH6r9Xg90c&location=${inputPlaces}`)
     .then(response => response.json())
     .then(data2 => {
+        //testAPi(data2, inputPlaces);
         positionStarMap(data2);
         getWeather(data2, inputPlaces);                               // doorgeven van data naar getWeather functie
                                                                       // Beter niet boven in window.onload function -> anders wordt het 2x uitgevoerd
@@ -76,7 +87,7 @@ function positionStarMap(data2){
                 'showstarlabels': true,
                 'gridlines_az': true,
                 'live': true,
-                'showposition': true
+                'showposition': false
             });
         });
     }
@@ -124,7 +135,17 @@ function getWeather(data2, inputPlaces){
         let containerWeatherLeft = document.getElementById('weatherLeftMenu').innerHTML = `
                 <div id="weatherLeftMenuBlock">
                     <div id="containerInfoLeft">
-                        <p id="current-time">${formattedTime}</p>
+                    ${/* begin https://www.youtube.com/watch?v=6trGQWzg2AI*/
+                    setInterval(() => {
+                        let time = new Date();
+                        let hour = time.getHours();
+                        let minutes2 = time.getMinutes();
+                        
+                        let container = document.getElementById('current-time');
+                        container.innerHTML = hour + ':' + minutes2
+                    }, 1000)
+                    /* eind https://www.youtube.com/watch?v=6trGQWzg2AI*/}
+                        <p id="current-time"></p>
                         &nbsp; 
                         <h1 id="current-inputplace">${inputPlaces}</h1>
                     </div>
