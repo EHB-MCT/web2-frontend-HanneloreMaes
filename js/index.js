@@ -33,14 +33,6 @@ function postInput(inputPlaces){
     })
 }
 
-async function getInput(inputPlaces){
-    await fetch(`https://sterrenkijker.herokuapp.com/inputPlace`)
-    .then(response => response.json())
-    .then(dataGet =>{
-        console.log("Succes Get", dataGet)
-    })
-}
-
 //ophalen van data voor lat en long van inputPlaces
 function getData(inputPlaces){
     fetch(`http://www.mapquestapi.com/geocoding/v1/address?key=y9jdsRhSBmSiVS7TFBcWCAsH6r9Xg90c&location=${inputPlaces}`)
