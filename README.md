@@ -13,7 +13,7 @@ Hieronder vind je de sources die ik gebruikt heb voor dit project:
         https://www.sliderrevolution.com/resources/css-arrow/
 
 4. Aanmaken van dynamische tijd:
-        How to make Weather App using Openweathermap API | Javascript - Responsive Website
+        How to make Weather App using Openweathermap API | Javascript - Responsive Website (37:54 - Updating the Date and Time Value)
         Youtube                 author: Asish Greorge Tech
         https://www.youtube.com/watch?v=6trGQWzg2AI
 
@@ -28,7 +28,7 @@ Hieronder vind je de sources die ik gebruikt heb voor dit project:
         Coding along: Boardgame REST API - Part 2
         Youtube                 author: Mike Derycke
         https://www.youtube.com/watch?v=3Ykr6dZjXhE
-        
+
         Coding along: Boardgame REST API - Part 3
         Youtube                 author: Mike Derycke
         https://www.youtube.com/watch?v=o7Mh1zOAjDY                
