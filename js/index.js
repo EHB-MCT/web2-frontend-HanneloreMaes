@@ -1,7 +1,8 @@
 "use strict";
 
-getStarted();
+window.onload = positionStarMap();
 
+getStarted();
 function getStarted(){
     let submitForm = document.getElementById('searchform');
     submitForm.addEventListener("submit", e => {
@@ -10,6 +11,7 @@ function getStarted(){
         getData(inputPlaces)
         postInput(inputPlaces);
     });
+
 }
 
 
@@ -70,10 +72,33 @@ function positionStarMap(data2){
                 'showstarlabels': true,
                 'gridlines_az': true,
                 'live': true,
-                'showposition': false
+                'showposition': false,
+                'showdate': false
             });
         });
-    }
+    } else if (data2 == null) {
+        S(document).ready(function() {
+            planetarium = S.virtualsky({
+                'id': 'starmapper',
+                'clock': false,
+                'projection': 'stereo',
+                'latitude': 50.85045,
+                'longitude': 4.34878,
+                'ground': true,
+                'gradient': true,
+                'constellations': true,
+                'constellationlabels': true,
+                'showplanets': true,
+                'showplanetslabels': true,
+                'showstars': true,
+                'showstarlabels': true,
+                'gridlines_az': true,
+                'live': true,
+                'showposition': false,
+                'showdate': false
+            });
+        });
+    }   
 }
 /* <!--eind https://virtualsky.lco.global/ --> */
 
