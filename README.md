@@ -12,15 +12,19 @@ Hieronder vind je de sources die ik gebruikt heb voor dit project:
         sliderrevolution.com    author: Carlo Flores
         https://www.sliderrevolution.com/resources/css-arrow/
 
-4. Aanmaken van dynamische tijd:
+4.   Css for button:
+        getcssscan.com          author: Pintura
+        https://getcssscan.com/css-buttons-examples
+
+5. Aanmaken van dynamische tijd:
         How to make Weather App using Openweathermap API | Javascript - Responsive Website (37:54 - Updating the Date and Time Value)
         Youtube                 author: Asish Greorge Tech
         https://www.youtube.com/watch?v=6trGQWzg2AI
 
-5. Opmaken van backend
+6. Opmaken van backend
         Opdracht: Full Stac website     author: Jasmien,Jens,Hannelore
 
-6. Gebruik mongodb + heroku
+7. Gebruik mongodb + heroku
         Coding Along: Boardgame REST API - Part 1
         Youtube                 author: Mike Derycke
         https://www.youtube.com/watch?v=JAFhwfyYEb4
@@ -32,3 +36,4 @@ Hieronder vind je de sources die ik gebruikt heb voor dit project:
         Coding along: Boardgame REST API - Part 3
         Youtube                 author: Mike Derycke
         https://www.youtube.com/watch?v=o7Mh1zOAjDY                
+
