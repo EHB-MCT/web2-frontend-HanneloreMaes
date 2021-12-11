@@ -2,6 +2,19 @@
 
 window.onload = getInput()
 
+function init(){
+    const editListener = document.getElementById('containerEdit');
+    editListener.addEventListener("click", e => {
+        e.preventDefault();
+        editInput();
+    });
+
+    const deleteListener = document.getElementById('containerDelete');
+    deleteListener.addEventListener("click", e => {
+        e.preventDefault();
+    })
+}
+
 async function getInput(){
     await fetch(`https://sterrenkijker.herokuapp.com/inputPlace`)
     .then(response => response.json())
@@ -13,8 +26,8 @@ async function getInput(){
                 <div id="savedPlaceContainer">
                     <h2 id="savedInput">${saved.input}</h2>
                     <div id="editDelete">
-                        <span id="background"><i class="fas fa-edit"></i></span>
-                        <span id="background2"><i class="fas fa-trash-alt"></i></span>
+                        <span id="containerEdit"><i class="fas fa-edit"></i></span>
+                        <span id="containerDelete"><i class="fas fa-trash-alt"></i></span>
                     </div>
                 </div>    
             `;
