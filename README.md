@@ -37,3 +37,11 @@ Hieronder vind je de sources die ik gebruikt heb voor dit project:
         Youtube                 author: Mike Derycke
         https://www.youtube.com/watch?v=o7Mh1zOAjDY                
 
+8. Usage og Wiki Api
+        Coding Challenge #75: Wikipedia API (14:32 - 17:05)
+        Youtube                 author: The Coding Train
+        https://www.youtube.com/watch?v=RPz75gcHj18
+
+9. Usage of GeoDB Cities Api
+        website of GeoDB
+        https://wirefreethought.github.io/geodb-cities-api-docs/
