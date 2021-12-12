@@ -1,4 +1,7 @@
-"use strict";
+import * as C from './credentials.js'
+const test1 = C.openweather;
+const test2= C.mapApi;
+const test3 = C.rapid;
 
 window.onload = positionStarMap();
 
@@ -37,7 +40,7 @@ function postInput(inputPlaces){
 
 //ophalen van data voor lat en long van inputPlaces
 function getData(inputPlaces){
-    fetch(`http://www.mapquestapi.com/geocoding/v1/address?key=y9jdsRhSBmSiVS7TFBcWCAsH6r9Xg90c&location=${inputPlaces}`)
+    fetch(`http://www.mapquestapi.com/geocoding/v1/address?key=${test2}&location=${inputPlaces}`)
     .then(response => response.json())
     .then(data2 => {
         getIdWiki(inputPlaces)
@@ -122,7 +125,7 @@ function getNearbyCities(idInput){
         "method": "GET",
         "headers": {
             "x-rapidapi-host": "wft-geo-db.p.rapidapi.com",
-            "x-rapidapi-key": "29e306b66bmsh45041b043cda44dp1ca8e9jsn1f25d8e9926c"
+            "x-rapidapi-key": test3
         }
     })
     .then(response => response.json())
@@ -131,13 +134,13 @@ function getNearbyCities(idInput){
         let nearest = nearbyPlaces.data
         nearest.forEach(weatherPlaces => {
             console.log(weatherPlaces);
-            let test1=weatherPlaces.latitude;
-            let test2=weatherPlaces.longitude;
-            console.log('testen', test1, test2);
+            let latWiki=weatherPlaces.latitude;
+            let lonWiki=weatherPlaces.longitude;
+            console.log('testen', latWiki, lonWiki);
             // const coordinateLat = test.map(obj => obj.latitude);
             // const coordinateLon = test.map(obj => obj.latitude);
 
-            fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${test1}&lon=${test2}&appid=8532eda8a091632f5428caff44d04e73&units=metric`)
+            fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latWiki}&lon=${lonWiki}&appid=${test1}&units=metric`)
             .then(response => response.json())
             .then(dataPlaces => {
                 console.log('Weather data', dataPlaces);
@@ -184,38 +187,11 @@ function getWeather(data2, inputPlaces){
     let lat = data2.results[0].locations[0].displayLatLng.lat;       //ophalen data voor de latitude
     let lon = data2.results[0].locations[0].displayLatLng.lng;       // ophalen data voor de longitude
     
-    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=8532eda8a091632f5428caff44d04e73&units=metric`)
+    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${test1}&units=metric`)
     .then(response => response.json())
     .then(data => {
         console.log('Weather data', data);
-        let weatherHourly = data.hourly;
-
-        // /* begin https://stackoverflow.com/questions/847185/convert-a-unix-timestamp-to-time-in-javascript/847196#847196*/
-        // let unix_timestamp = data.current.dt;
-        // let date = new Date(unix_timestamp * 1000);
-        // let hours = date.getHours();
-        // let minutes = "00";
-        // let formattedTime = hours + ':' + minutes;
-        // /* Eind https://stackoverflow.com/questions/847185/convert-a-unix-timestamp-to-time-in-javascript/847196#847196*/
-
-        //     let containerNearestPlace = document.getElementById('placeToSeeStars').innerHTML = `
-        //         <div id="weatherNearestPlace">
-        //             <h1 id="nearestPlace">Nearest place to see stars:</h1>
-        //             <div id="ContainerAllInfoNearest">
-        //                 <div id="locatieTimeNearest">
-        //                     <h2 id="locationNearbyCity">${inputPlaces}</h2>
-        //                     <p id="clockNearest">${formattedTime}</p>
-        //                 </div>
-        //                 <div id="columnTextNearest">
-        //                     <p id="temperature">${data.current.temp}°C</pv>
-        //                     <div id="conditionWeatherNearest">
-        //                         <img class="iconWeatherNearest" src="http://openweathermap.org/img/wn/${data.current.weather[0].icon}.png" alt="icon-weather-condition">
-        //                         <p id="weatherConditionNameNearest">${data.current.weather[0].description}</p>
-        //                     </div>
-        //                     <div class="arrow"></div>
-        //                 </div>
-        //             </div>
-        //         </div>`;                
+        let weatherHourly = data.hourly;           
 
         let containerWeatherLeft = document.getElementById('weatherLeftMenu').innerHTML = `
                 <div id="weatherLeftMenuBlock">
