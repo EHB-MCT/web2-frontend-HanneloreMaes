@@ -121,11 +121,11 @@ function getIdWiki(inputPlaces){
     })
 }
 function getNearbyCities(idInput){
-    fetch(`https://wft-geo-db.p.rapidapi.com/v1/geo/cities/${idInput}/nearbyCities?radius=100&languageCode=en&types=CITY`, {
+    fetch(`https://wft-geo-db.p.rapidapi.com/v1/geo/cities/${idInput}/nearbyCities?radius=100&types=CITY`, {
         "method": "GET",
         "headers": {
             "x-rapidapi-host": "wft-geo-db.p.rapidapi.com",
-            "x-rapidapi-key": test3
+            "x-rapidapi-key": `${test3}`
         }
     })
     .then(response => response.json())
@@ -150,10 +150,10 @@ function getNearbyCities(idInput){
                 let date = new Date(unix_timestamp * 1000);
                 let hours = date.getHours();
                 let minutes = "00";
-                let formattedTime = hours + ':' + minutes;
+                let formattedTime = hours + ':' + '0' + minutes;
                 /* Eind https://stackoverflow.com/questions/847185/convert-a-unix-timestamp-to-time-in-javascript/847196#847196*/
 
-                if (dataPlaces.current.weather[0].description == "clear"){
+                if (dataPlaces.current.weather[0].main == "Clear"){
                     let containerNearestPlace = document.getElementById('placeToSeeStars').innerHTML = `
                         <div id="weatherNearestPlace">
                             <h1 id="nearestPlace">Nearest place to see stars:</h1>
@@ -172,7 +172,7 @@ function getNearbyCities(idInput){
                                 </div>
                             </div>
                         </div>`;
-                } else if(dataPlaces.current.weather[0].description != "clear"){
+                } else if(dataPlaces.current.weather[0].main != "Clear"){
                     let containerNearestPlace = document.getElementById('placeToSeeStars').innerHTML = `
                         <div id="weatherNoNearestPlace">
                             <h2 id="noNearestPlace">There is no nearest place with clear sky at this moment</h1>`;
