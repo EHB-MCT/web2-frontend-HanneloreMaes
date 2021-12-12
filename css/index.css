@@ -303,6 +303,19 @@ a:link {
 	color: white;
 	padding: 0% 2%;
 }
+#weatherNoNearestPlace{
+	right:0;
+	margin:0% 2% 1% 0%;
+	background-color: rgba(0, 27, 44, 0.664);
+	border-radius: 8%;
+	width: 22%;
+	padding-left: 2%;
+}
+#noNearestPlace{
+	font-size: 16pt;
+	color: white;
+}
+
 #locatieTimeNearest{
 	display: flex;
 	flex-direction: row;

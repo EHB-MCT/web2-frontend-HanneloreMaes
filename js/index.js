@@ -118,7 +118,7 @@ function getIdWiki(inputPlaces){
     })
 }
 function getNearbyCities(idInput){
-    fetch(`https://wft-geo-db.p.rapidapi.com/v1/geo/cities/${idInput}/nearbyCities?radius=100`, {
+    fetch(`https://wft-geo-db.p.rapidapi.com/v1/geo/cities/${idInput}/nearbyCities?radius=100&languageCode=en&types=CITY`, {
         "method": "GET",
         "headers": {
             "x-rapidapi-host": "wft-geo-db.p.rapidapi.com",
@@ -127,48 +127,55 @@ function getNearbyCities(idInput){
     })
     .then(response => response.json())
     .then(nearbyPlaces => {
-        //console.log('Nearby Places', nearbyPlaces);
-        console.log('Lat&Lon nearby place', nearbyPlaces.data[0].latitude, nearbyPlaces.data[0].longitude);
-        let test = nearbyPlaces.data
-        let coordinatesLat = test.map(obj => obj.latitude);
-        let coordinatesLon = test.map(obj2 => obj2.longitude)
-       
-        console.log('Coordinates', coordinatesLat);
+        console.log('Data nearby place', nearbyPlaces.data);
+        let nearest = nearbyPlaces.data
+        nearest.forEach(weatherPlaces => {
+            console.log(weatherPlaces);
+            let test1=weatherPlaces.latitude;
+            let test2=weatherPlaces.longitude;
+            console.log('testen', test1, test2);
+            // const coordinateLat = test.map(obj => obj.latitude);
+            // const coordinateLon = test.map(obj => obj.latitude);
 
-        // nearbyPlaces.forEach(weatherPlaces => {
-        //     fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=8532eda8a091632f5428caff44d04e73&units=metric`)
-        //     .then(response => response.json())
-        //     .then(dataPlaces => {
-        //         console.log('Weather data', data);
+            fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${test1}&lon=${test2}&appid=8532eda8a091632f5428caff44d04e73&units=metric`)
+            .then(response => response.json())
+            .then(dataPlaces => {
+                console.log('Weather data', dataPlaces);
 
-        //         /* begin https://stackoverflow.com/questions/847185/convert-a-unix-timestamp-to-time-in-javascript/847196#847196*/
-        //         let unix_timestamp = data.current.dt;
-        //         let date = new Date(unix_timestamp * 1000);
-        //         let hours = date.getHours();
-        //         let minutes = "00";
-        //         let formattedTime = hours + ':' + minutes;
-        //         /* Eind https://stackoverflow.com/questions/847185/convert-a-unix-timestamp-to-time-in-javascript/847196#847196*/
+                /* begin https://stackoverflow.com/questions/847185/convert-a-unix-timestamp-to-time-in-javascript/847196#847196*/
+                let unix_timestamp = dataPlaces.current.dt;
+                let date = new Date(unix_timestamp * 1000);
+                let hours = date.getHours();
+                let minutes = "00";
+                let formattedTime = hours + ':' + minutes;
+                /* Eind https://stackoverflow.com/questions/847185/convert-a-unix-timestamp-to-time-in-javascript/847196#847196*/
 
-        //             let containerNearestPlace = document.getElementById('placeToSeeStars').innerHTML = `
-        //                 <div id="weatherNearestPlace">
-        //                     <h1 id="nearestPlace">Nearest place to see stars:</h1>
-        //                     <div id="ContainerAllInfoNearest">
-        //                         <div id="locatieTimeNearest">
-        //                             <h2 id="locationNearbyCity">${inputPlaces}</h2>
-        //                             <p id="clockNearest">${formattedTime}</p>
-        //                         </div>
-        //                         <div id="columnTextNearest">
-        //                             <p id="temperature">${data.current.temp}°C</pv>
-        //                             <div id="conditionWeatherNearest">
-        //                                 <img class="iconWeatherNearest" src="http://openweathermap.org/img/wn/${data.current.weather[0].icon}.png" alt="icon-weather-condition">
-        //                                 <p id="weatherConditionNameNearest">${data.current.weather[0].description}</p>
-        //                             </div>
-        //                             <div class="arrow"></div>
-        //                         </div>
-        //                     </div>
-        //                 </div>`;
-        //     });
-        // });
+                if (dataPlaces.current.weather[0].description == "clear"){
+                    let containerNearestPlace = document.getElementById('placeToSeeStars').innerHTML = `
+                        <div id="weatherNearestPlace">
+                            <h1 id="nearestPlace">Nearest place to see stars:</h1>
+                            <div id="ContainerAllInfoNearest">
+                                <div id="locatieTimeNearest">
+                                    <h2 id="locationNearbyCity">${inputPlaces}</h2>
+                                    <p id="clockNearest">${formattedTime}</p>
+                                </div>
+                                <div id="columnTextNearest">
+                                    <p id="temperature">${dataPlaces.current.temp}°C</pv>
+                                    <div id="conditionWeatherNearest">
+                                        <img class="iconWeatherNearest" src="http://openweathermap.org/img/wn/${dataPlaces.current.weather[0].icon}.png" alt="icon-weather-condition">
+                                        <p id="weatherConditionNameNearest">${dataPlaces.current.weather[0].description}</p>
+                                    </div>
+                                    <div class="arrow"></div>
+                                </div>
+                            </div>
+                        </div>`;
+                } else if(dataPlaces.current.weather[0].description != "clear"){
+                    let containerNearestPlace = document.getElementById('placeToSeeStars').innerHTML = `
+                        <div id="weatherNoNearestPlace">
+                            <h2 id="noNearestPlace">There is no nearest place with clear sky at this moment</h1>`;
+                }
+            });
+        });
     });    
 }
 
