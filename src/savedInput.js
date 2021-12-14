@@ -35,7 +35,6 @@ function editInput(dataGet){
         document.getElementById('editFrom').style.display = "block";
         if(cityId){
             if(e.target.className.indexOf('edit') !== -1){
-                console.log('Edit')
                 document.getElementById('submitCity').addEventListener("submit", e => {
                     e.preventDefault();
                     let newCityName = document.getElementById('editCity').value;
@@ -57,7 +56,7 @@ function editInput(dataGet){
                         setTimeout(getInput, 1000)
                     })
                 })
-                
+                console.log('Edit')                
             }
             
             if(e.target.className.indexOf('trash') !== -1){
