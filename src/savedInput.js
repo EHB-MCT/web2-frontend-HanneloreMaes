@@ -1,12 +1,9 @@
-"use strict";
-
 window.onload = getInput()
 
-
 async function getInput(){
-    await fetch(`https://sterrenkijker.herokuapp.com/inputPlace`)
-    .then(response => response.json())
-    .then(dataGet =>{
+    const response = await fetch(`https://sterrenkijker.herokuapp.com/inputPlace`);
+    const dataGet = await response.json();
+   
         console.log("Succes Get", dataGet)
         dataGet.forEach(saved => {
             const containerSaved = document.getElementById('savedContainer');
@@ -14,20 +11,20 @@ async function getInput(){
             <div id="${saved._id}" class="savedPlaceContainer">
                 <h2 id="savedInput">${saved.input}</h2>
                 <div id="editDelete">
-                    <button id="containerEdit"><i class="fas fa-edit"></i></button>
-                    <button id="containerDelete"><i class="fas fa-trash-alt"></i></button>
+                    <button class="containerEdit"><i class="fas fa-edit"></i></button>
+                    <button class="containerDelete"><i class="fas fa-trash-alt"></i></button>
                 </div>
             </div>    
             `;
             containerSaved.insertAdjacentHTML('beforeend', savedString);
-        })
-    });
+        });
+  
 
     editInput();
 }
 
 function editInput(){
-    document.getElementById('editContainer').addEventListener('click', (e) => {
+    document.getElementById('savedContainer').addEventListener('click', (e) => {
         
         const cityId = e.target.closest('.savedPlaceContainer').id;
         

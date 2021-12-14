@@ -1,0 +1,23 @@
+{
+  "name": "web2-frontend-hanneloremaes",
+  "version": "1.0.0",
+  "description": "Hieronder vind je de sources die ik gebruikt heb voor dit project:",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EHB-MCT/web2-frontend-HanneloreMaes.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EHB-MCT/web2-frontend-HanneloreMaes/issues"
+  },
+  "homepage": "https://github.com/EHB-MCT/web2-frontend-HanneloreMaes#readme",
+  "dependencies": {
+    "webpack-cli": "^4.9.1"
+  }
+}
