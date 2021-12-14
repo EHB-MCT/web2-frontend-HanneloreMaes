@@ -28,6 +28,16 @@ async function getInput(){
 }
 
 function editInput(dataGet){
+
+    // Hier ligt het probleem waar ik op het laatste van de les nog even over had gesproken.
+    // Het probleem waar ik tegen aan loop is:
+    // Ik kan de form aanspreken en kan iets ingeven als verandering van de gemeente/stad, maar als ik op send druk
+    // dan voert hij gelijk de getInput() uit en wordt er geen wijzeging doorgevoerd.
+    // Als ik dan ga kijken bij postman krijg ik mijn error te zien (file script.js(backend) op lijn 136).
+    // Zelf heb ik al wat proberen zoeken, maar ik kan niets vinden.
+    // Super bedankt dat je ernaar wilt kijken 
+    // Groetjes
+
     document.getElementById('savedContainer').addEventListener('click', (e) => {
         
         const cityId = e.target.closest('.savedPlaceContainer').id;
