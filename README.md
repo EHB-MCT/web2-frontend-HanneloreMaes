@@ -45,3 +45,6 @@ Hieronder vind je de sources die ik gebruikt heb voor dit project:
 9. Usage of GeoDB Cities Api
         website of GeoDB
         https://wirefreethought.github.io/geodb-cities-api-docs/
+
+10. https://github.com/EHB-MCT/web-2-groupproject-frontend-team-teacher/blob/main/src/index.js
+

@@ -2,18 +2,6 @@
 
 window.onload = getInput()
 
-function init(){
-    const editListener = document.getElementById('containerEdit');
-    editListener.addEventListener("click", e => {
-        e.preventDefault();
-        editInput();
-    });
-
-    const deleteListener = document.getElementById('containerDelete');
-    deleteListener.addEventListener("click", e => {
-        e.preventDefault();
-    })
-}
 
 async function getInput(){
     await fetch(`https://sterrenkijker.herokuapp.com/inputPlace`)
@@ -23,47 +11,54 @@ async function getInput(){
         dataGet.forEach(saved => {
             const containerSaved = document.getElementById('savedContainer');
             const savedString =  `
-                <div id="savedPlaceContainer">
-                    <h2 id="savedInput">${saved.input}</h2>
-                    <div id="editDelete">
-                        <span id="containerEdit"><i class="fas fa-edit"></i></span>
-                        <span id="containerDelete"><i class="fas fa-trash-alt"></i></span>
-                    </div>
-                </div>    
+            <div id="${saved._id}" class="savedPlaceContainer">
+                <h2 id="savedInput">${saved.input}</h2>
+                <div id="editDelete">
+                    <button id="containerEdit"><i class="fas fa-edit"></i></button>
+                    <button id="containerDelete"><i class="fas fa-trash-alt"></i></button>
+                </div>
+            </div>    
             `;
             containerSaved.insertAdjacentHTML('beforeend', savedString);
         })
-    })
+    });
+
+    editInput();
 }
 
 function editInput(){
-    let header = new Headers();
-    header.append("Content-Type", "application/json");
+    document.getElementById('editContainer').addEventListener('click', (e) => {
+        
+        const cityId = e.target.closest('.savedPlaceContainer').id;
+        
+        if(cityId){
+            if(e.target.className.indexOf('edit') !== -1){
+                console.log('Edit')
+                let newCityName = document.getElementById('editCity').value;
+                let inputPlace = {
+                    input: newCityName
+                }
 
-    let inputPlace = {
-        input: inputPlace
-    }
+                let header = new Headers();
+                header.append("Content-Type", "application/json");
 
-    fetch(`https://sterrenkijker.herokuapp.com/updateInput/:input`, {
-        method: 'PUT',
-        headers: header,
-        body: JSON.stringify(inputPlace)
-    })
-    .then(response => response.json())
-    .then(dataGet =>{
-        console.log("Succes Update", dataGet)
-        dataGet.forEach(saved => {
-            const containerSaved = document.getElementById('savedContainer');
-            const savedString =  `
-                <div id="savedPlaceContainer">
-                    <h2 id="savedInput">${saved.input}</h2>
-                    <div id="editDelete">
-                        <button id="background" class="fas fa-edit"></button>
-                        <button id="background2"><i class="fas fa-trash-alt"></i></span>
-                    </div>
-                </div>    
-            `;
-            containerSaved.insertAdjacentHTML('beforeend', savedString);
-        })
-    })
+                fetch(`https://sterrenkijker.herokuapp.com/updateInput/:input`, {
+                    method: 'PUT',
+                    headers: header,
+                    body: JSON.stringify(inputPlace)
+                })
+                .then(response => response.json())
+                .then(dataPut =>{
+                    console.log("Succes Update", dataPut);
+                    setTimeout(document.getElementById('editContainer').style.display = "none", 2000)
+                    setTimeout(getInput(), 1000)
+                })
+            }
+            
+            if(e.target.className.indexOf('trash') !== -1){
+                console.log('trash')
+            }
+    
+        }
+    });        
 }

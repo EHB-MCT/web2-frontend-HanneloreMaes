@@ -19,7 +19,7 @@ h1{
     padding: 0% 2%;
 }
 
-#savedPlaceContainer{
+.savedPlaceContainer{
     display: flex;
     flex-direction: row;
     align-items: baseline;
