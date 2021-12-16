@@ -143,7 +143,7 @@ a:link {
 #showIndex{
 	position: absolute;
 	z-index: 150;
-	top: 1.5%;
+	top: 2%;
 }
 
 #savedInput, #scrollMap{
