@@ -1,5 +1,4 @@
 let cityId;
-
 window.onload = function () {
     console.log('loaded');
     getInput();
@@ -11,6 +10,7 @@ window.onload = function () {
         console.log('click');
 
         cityId = e.target.closest('.savedPlaceContainer').id;
+        console.log("Test if loaded/clicked", cityId)
 
         // On EDIT
         if (cityId && e.target.className.indexOf('edit') !== -1) {
@@ -30,10 +30,12 @@ async function getInput() {
     const dataGet = await response.json();
 
     // @TODO Clear the current list
-
+    
     console.log("Succes Get", dataGet)
     const containerSaved = document.getElementById('savedContainer');
+    containerSaved.innerHTML = "";
     dataGet.forEach(saved => {
+        console.log(saved._id)
         const savedString = `
             <div id="${saved._id}" class="savedPlaceContainer">
                 <h2 id="savedInput">${saved.input}</h2>
@@ -41,37 +43,35 @@ async function getInput() {
                     <button class="containerEdit"><i class="fas fa-edit"></i></button>
                     <button class="containerDelete"><i class="fas fa-trash-alt"></i></button>
                 </div>
-
-                
-
             </div>`;
         containerSaved.insertAdjacentHTML('beforeend', savedString);
     });
-
 }
 
 function submitChange(event) {
     event.preventDefault();
     console.log('edit the city');
+    console.log("Test meegeven id", cityId);
 
-    // event.preventDefault();
-    //                 let newCityName = document.getElementById('editCity').value;
+    event.preventDefault();
+    let newCityName = document.getElementById('editCity').value;
+    console.log(newCityName)
 
-    //                 let header = new Headers();
-    //                 header.append("Content-Type", "application/json");
+    let header = new Headers();
+    header.append("Content-Type", "application/json");
 
-    //                 fetch(`https://sterrenkijker.herokuapp.com/updateInput/:id`, {
-    //                     method: 'PUT',
-    //                     headers: header,
-    //                     body: JSON.stringify({
-    //                         input: newCityName
-    //                     })
-    //                 })
-    //                 .then(response => response.json())
-    //                 .then(dataPut =>{
-    //                     console.log("Succes Update", dataPut);
-    //                     setTimeout(document.getElementById('editFrom').style.display = "none", 2000)
-    //                     setTimeout(getInput, 1000)
-    //                 })
+    fetch(`https://sterrenkijker.herokuapp.com/updateInput/:${cityId}`, {
+        method: 'PUT',
+        headers: header,
+        body: JSON.stringify({
+            id: cityId,
+            input: newCityName
+        })
+    })
+    .then(response => response.json())
+    .then(dataPut =>{
+        console.log("Succes Update", dataPut);
+        getInput()
+    })
 
 }
