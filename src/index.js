@@ -3,17 +3,32 @@ const test1 = C.openweather;
 const test2= C.mapApi;
 const test3 = C.rapid;
 
-window.onload = positionStarMap();
+window.onload = function() {
+    positionStarMap()
+    getStarted();
+};
 
-getStarted();
 function getStarted(){
     let submitForm = document.getElementById('searchform');
     submitForm.addEventListener("submit", e => {
         e.preventDefault();
         let inputPlaces = document.getElementById("inputPlace").value;
-        getData(inputPlaces)
+        getData(inputPlaces);
         postInput(inputPlaces);
     });
+
+    let scrollMap = document.getElementById('scrollMap');
+    scrollMap.addEventListener('click', e => {
+        e.preventDefault();
+        document.getElementById('mainMap').style.display = "none"; 
+        document.getElementById('showIndex').style.display = "block";
+    })
+    let showBack = document.getElementById('showIndex');
+    showBack.addEventListener('click', e => {
+        e.preventDefault();
+        document.getElementById('mainMap').style.display = "block"; 
+        document.getElementById('showIndex').style.display = "none";
+    })
 
 }
 
@@ -83,29 +98,30 @@ function positionStarMap(data2){
     } else if (data2 == null) {
         S(document).ready(function() {
             planetarium = S.virtualsky({
-                'id': 'starmapper',
-                'clock': false,
-                'projection': 'stereo',
-                'latitude': 50.85045,
-                'longitude': 4.34878,
-                'ground': true,
-                'gradient': true,
-                'constellations': true,
-                'constellationlabels': true,
-                'showplanets': true,
-                'showplanetslabels': true,
-                'showstars': true,
-                'showstarlabels': true,
-                'gridlines_az': true,
-                'live': true,
-                'showposition': false,
-                'showdate': false
+                id: 'starmapper',
+                projection: 'stereo',
+                clock: false,
+                latitude: 50.85045,
+                longitude: 4.34878,
+                ground: true,
+                gradient: true,
+                constellations: true,
+                constellationlabels: true,
+                showplanets: true,
+                showplanetslabels: true,
+                showstars: true,
+                showstarlabels: true,
+                gridlines_az: true,
+                live: true,
+                showposition: false,
+                showdate: false
             });
         });
     }   
 }
 /* <!--eind https://virtualsky.lco.global/ --> */
 
+// ophalen van id voor api gebruik om nabijgelegen cities te zoeken
 function getIdWiki(inputPlaces){
     fetch(`https://www.wikidata.org/w/api.php?action=wbgetentities&sites=enwiki&titles=${inputPlaces}&format=json`)
     .then(response => response.json())
@@ -120,6 +136,8 @@ function getIdWiki(inputPlaces){
         getNearbyCities(idInput)
     })
 }
+
+// functie voor ophalen nabijgelegen cities
 function getNearbyCities(idInput){
     fetch(`https://wft-geo-db.p.rapidapi.com/v1/geo/cities/${idInput}/nearbyCities?radius=100&types=CITY`, {
         "method": "GET",
@@ -182,6 +200,7 @@ function getNearbyCities(idInput){
     });    
 }
 
+// ophalen van het weer voor ingegeven plaats
 function getWeather(data2, inputPlaces){
 
     let lat = data2.results[0].locations[0].displayLatLng.lat;       //ophalen data voor de latitude

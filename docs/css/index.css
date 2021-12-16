@@ -33,23 +33,16 @@ a:link {
 	z-index: 2;
 	cursor: pointer;
 }
-#headerMap {
-	overflow-x: hidden;
+#starmapper {
+	overflow: hidden;
 	position: relative;
-	display: flex;
-	z-index: -1;
+	/* display: flex; */
 	height: 100vh;
 	width: 100%;
 	margin: 0;
 	padding: 0;
 }
-#starmapper { 
-	overflow: hidden; 
-	z-index: 1;
-    height: 100%;
-    width:100%; 
-    position: relative;
-}
+
 #virtualskyinfobox{
 	font-size: 12px;
 	display:none;
@@ -131,7 +124,7 @@ a:link {
 	/*https://getcssscan.com/css-buttons-examples eind*/
 }
 
-#btn, #savedInput{
+#btn, #savedInput, #scrollMap, #showIndex{
 	margin: 0;
 	/*https://getcssscan.com/css-buttons-examples begin*/
 	background-color: #e4eef5 ;
@@ -147,7 +140,13 @@ a:link {
 	/*https://getcssscan.com/css-buttons-examples eind*/
 }
 
-#savedInput{
+#showIndex{
+	position: absolute;
+	z-index: 150;
+	top: 1.5%;
+}
+
+#savedInput, #scrollMap{
 	margin: 1% 2% 1% 0%;
 }
 
