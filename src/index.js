@@ -8,6 +8,7 @@ window.onload = function() {
     getStarted();
 };
 
+//start of the site
 function getStarted(){
     let submitForm = document.getElementById('searchform');
     submitForm.addEventListener("submit", e => {
@@ -32,41 +33,7 @@ function getStarted(){
 
 }
 
-
-function postInput(inputPlaces){
-    console.log('Plaats', inputPlaces);
-    
-    let header = new Headers();
-    header.append("Content-Type", "application/json");
-
-    fetch("https://sterrenkijker.herokuapp.com/saveInputPlace", {
-        method: 'POST',
-        headers: header,                        // laat weten welke taal hij moet hebben en in welke taal hij communiceert
-        body: JSON.stringify({
-            input: inputPlaces
-        }),
-    }) 
-    .then(response => response.json())
-    .then(dataPost=> {
-        console.log("Succes Post", dataPost)
-        getInput(inputPlaces)
-    })
-}
-
-//ophalen van data voor lat en long van inputPlaces
-function getData(inputPlaces){
-    fetch(`http://www.mapquestapi.com/geocoding/v1/address?key=${test2}&location=${inputPlaces}`)
-    .then(response => response.json())
-    .then(data2 => {
-        getIdWiki(inputPlaces)
-        //testApi(data2, inputPlaces);
-        positionStarMap(data2);
-        getWeather(data2, inputPlaces);                               // doorgeven van data naar getWeather functie
-                                                                      // Beter niet boven in window.onload function -> anders wordt het 2x uitgevoerd
-
-    })
-}
-
+// call to the starmap
 /* <!--begin https://virtualsky.lco.global/ --> */
 let planetarium;
 function positionStarMap(data2){
@@ -121,6 +88,41 @@ function positionStarMap(data2){
 }
 /* <!--eind https://virtualsky.lco.global/ --> */
 
+// post of new function
+function postInput(inputPlaces){
+    console.log('Plaats', inputPlaces);
+    
+    let header = new Headers();
+    header.append("Content-Type", "application/json");
+
+    fetch("https://sterrenkijker.herokuapp.com/saveInputPlace", {
+        method: 'POST',
+        headers: header,                        // laat weten welke taal hij moet hebben en in welke taal hij communiceert
+        body: JSON.stringify({
+            input: inputPlaces
+        }),
+    }) 
+    .then(response => response.json())
+    .then(dataPost=> {
+        console.log("Succes Post", dataPost)
+        getInput(inputPlaces)
+    })
+}
+
+//ophalen van data voor lat en long van inputPlaces
+function getData(inputPlaces){
+    fetch(`http://www.mapquestapi.com/geocoding/v1/address?key=${test2}&location=${inputPlaces}`)
+    .then(response => response.json())
+    .then(data2 => {
+        getIdWiki(inputPlaces)
+        //testApi(data2, inputPlaces);
+        positionStarMap(data2);
+        getWeather(data2, inputPlaces);                               // doorgeven van data naar getWeather functie
+                                                                      // Beter niet boven in window.onload function -> anders wordt het 2x uitgevoerd
+
+    })
+}
+
 // ophalen van id voor api gebruik om nabijgelegen cities te zoeken
 function getIdWiki(inputPlaces){
     fetch(`https://www.wikidata.org/w/api.php?action=wbgetentities&sites=enwiki&titles=${inputPlaces}&format=json`)
@@ -167,8 +169,8 @@ function getNearbyCities(idInput){
                 let unix_timestamp = dataPlaces.current.dt;
                 let date = new Date(unix_timestamp * 1000);
                 let hours = date.getHours();
-                let minutes = "00";
-                let formattedTime = hours + ':' + '0' + minutes;
+                let minutes = "0" + date.getMinutes;
+                let formattedTime = hours + ':' + minutes;
                 /* Eind https://stackoverflow.com/questions/847185/convert-a-unix-timestamp-to-time-in-javascript/847196#847196*/
 
                 if (dataPlaces.current.weather[0].main == "Clear"){

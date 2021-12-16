@@ -1,4 +1,5 @@
 let cityId;
+
 window.onload = function () {
     console.log('loaded');
     getInput();
@@ -12,14 +13,27 @@ window.onload = function () {
         cityId = e.target.closest('.savedPlaceContainer').id;
         console.log("Test if loaded/clicked", cityId)
 
-        // On EDIT
+        // Voor edit
         if (cityId && e.target.className.indexOf('edit') !== -1) {
             console.log('Edit')
             document.getElementById('editForm').style.display = "block";
-            //@TODO add current city name to inputfield   
+            
+            //TODO add current city name to inputfield   
 
-        } else if (cityId && e.target.className.indexOf('trash') !== -1) {
+        } 
+
+        // Voor delete
+        if (cityId && e.target.className.indexOf('trash') !== -1) {
             console.log('trash')
+            console.log('deleted id', cityId);
+            fetch(`https://sterrenkijker.herokuapp.com/deleteInput/${cityId}`, {
+                method: 'DELETE'
+            })
+            .then(response => response.json())
+            .then(dataDel => {
+                console.log(`challenge deleted with id: ${cityId}`, dataDel);
+                getInput()
+            });
         }
 
     });
@@ -46,6 +60,7 @@ async function getInput() {
             </div>`;
         containerSaved.insertAdjacentHTML('beforeend', savedString);
     });
+
 }
 
 function submitChange(event) {
@@ -60,11 +75,10 @@ function submitChange(event) {
     let header = new Headers();
     header.append("Content-Type", "application/json");
 
-    fetch(`https://sterrenkijker.herokuapp.com/updateInput/:${cityId}`, {
+    fetch(`https://sterrenkijker.herokuapp.com/updateInput/${cityId}`, {
         method: 'PUT',
         headers: header,
         body: JSON.stringify({
-            id: cityId,
             input: newCityName
         })
     })
