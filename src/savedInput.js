@@ -99,7 +99,7 @@ function submitChange(event) {
     let newCity = document.getElementById('editCity').value
     console.log(newCity);
 
-    fetch(`https://sterrenkijker.herokuapp.com/updateInput/:${id}`, {
+    fetch(`https://sterrenkijker.herokuapp.com/updateInput/:${cityId}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
