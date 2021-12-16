@@ -4,6 +4,7 @@ window.onload = function () {
     console.log('loaded');
     getInput();
 
+
     // Prep event listeners for submit
     document.getElementById('editForm').addEventListener("submit", submitChange);
     // Prep event listeners for clicks on icons
@@ -26,18 +27,35 @@ window.onload = function () {
         if (cityId && e.target.className.indexOf('trash') !== -1) {
             console.log('trash')
             console.log('deleted id', cityId);
-            fetch(`https://sterrenkijker.herokuapp.com/deleteInput/${cityId}`, {
-                method: 'DELETE'
-            })
-            .then(response => response.json())
-            .then(dataDel => {
-                console.log(`challenge deleted with id: ${cityId}`, dataDel);
-                getInput()
-            });
         }
 
     });
 }
+
+// function eventEdit(id){
+
+//     document.getElementById('editForm').addEventListener('submit', function (e) {
+//         e.preventDefault();
+//         let newCity = document.getElementById('editCity').value
+//         console.log(newCity);
+
+//         fetch(`https://sterrenkijker.herokuapp.com/updateInput/:${id}`, {
+//                 method: 'PUT',
+//                 headers: {
+//                     'Content-Type': 'application/json',
+//                 },
+//                 body: JSON.stringify({
+//                     input: `${newCity}`
+//                 })
+//             })
+//             .then(response => response.json())
+//             .then(data => {
+//                 console.log('New update is made', data);
+//                 setTimeout(document.getElementById('editForm').style.display = "none", 2000)
+//                 setTimeout(getInput, 1000)
+//             });
+//     });
+// }
 
 async function getInput() {
     const response = await fetch(`https://sterrenkijker.herokuapp.com/inputPlace`);
@@ -54,12 +72,21 @@ async function getInput() {
             <div id="${saved._id}" class="savedPlaceContainer">
                 <h2 id="savedInput">${saved.input}</h2>
                 <div id="editDelete">
-                    <button class="containerEdit"><i class="fas fa-edit"></i></button>
-                    <button class="containerDelete"><i class="fas fa-trash-alt"></i></button>
+                    <button id="edit" class="containerEdit" value ="${saved._id}"><i class="fas fa-edit"></i></button>
+                    <button id = "delete" class="containerDelete" value ="${saved._id}"><i class="fas fa-trash-alt"></i></button>
                 </div>
             </div>`;
         containerSaved.insertAdjacentHTML('beforeend', savedString);
     });
+    // let verander = document.getElementsByClassName('containerEdit');
+    // for (let i = 0; i < verander.length; i++) {
+    //     verander[i].addEventListener('click', e => {
+    //         e.preventDefault();
+    //         let id = document.getElementById('edit').value;
+    //         document.getElementById('editForm').style.display = "block"
+    //         eventEdit(id);
+    //     })
+    // }
 
 }
 
@@ -69,23 +96,24 @@ function submitChange(event) {
     console.log("Test meegeven id", cityId);
 
     event.preventDefault();
-    let newCityName = document.getElementById('editCity').value;
-    console.log(newCityName)
+    let newCity = document.getElementById('editCity').value
+    console.log(newCity);
 
-    let header = new Headers();
-    header.append("Content-Type", "application/json");
-
-    fetch(`https://sterrenkijker.herokuapp.com/updateInput/${cityId}`, {
+    fetch(`https://sterrenkijker.herokuapp.com/updateInput/:${id}`, {
         method: 'PUT',
-        headers: header,
+        headers: {
+            'Content-Type': 'application/json',
+        },
         body: JSON.stringify({
-            input: newCityName
+            input: `${newCity}`
         })
     })
     .then(response => response.json())
-    .then(dataPut =>{
-        console.log("Succes Update", dataPut);
-        getInput()
-    })
+    .then(data => {
+        console.log('New update is made', data);
+        setTimeout(document.getElementById('editForm').style.display = "none", 2000);
+        // setTimeout(getInput, 1000)
+        getInput();
+    });
 
 }
