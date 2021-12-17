@@ -32,31 +32,6 @@ window.onload = function () {
     });
 }
 
-// function eventEdit(id){
-
-//     document.getElementById('editForm').addEventListener('submit', function (e) {
-//         e.preventDefault();
-//         let newCity = document.getElementById('editCity').value
-//         console.log(newCity);
-
-//         fetch(`https://sterrenkijker.herokuapp.com/updateInput/:${id}`, {
-//                 method: 'PUT',
-//                 headers: {
-//                     'Content-Type': 'application/json',
-//                 },
-//                 body: JSON.stringify({
-//                     input: `${newCity}`
-//                 })
-//             })
-//             .then(response => response.json())
-//             .then(data => {
-//                 console.log('New update is made', data);
-//                 setTimeout(document.getElementById('editForm').style.display = "none", 2000)
-//                 setTimeout(getInput, 1000)
-//             });
-//     });
-// }
-
 async function getInput() {
     const response = await fetch(`https://sterrenkijker.herokuapp.com/inputPlace`);
     const dataGet = await response.json();
@@ -78,15 +53,6 @@ async function getInput() {
             </div>`;
         containerSaved.insertAdjacentHTML('beforeend', savedString);
     });
-    // let verander = document.getElementsByClassName('containerEdit');
-    // for (let i = 0; i < verander.length; i++) {
-    //     verander[i].addEventListener('click', e => {
-    //         e.preventDefault();
-    //         let id = document.getElementById('edit').value;
-    //         document.getElementById('editForm').style.display = "block"
-    //         eventEdit(id);
-    //     })
-    // }
 
 }
 
@@ -94,25 +60,19 @@ function submitChange(event) {
     event.preventDefault();
     console.log('edit the city');
     console.log("Test meegeven id", cityId);
-
-    event.preventDefault();
     let newCity = document.getElementById('editCity').value
     console.log(newCity);
 
-    fetch(`https://sterrenkijker.herokuapp.com/updateInput/:${cityId}`, {
+    fetch(`https://sterrenkijker.herokuapp.com/updateInput/${cityId}/${newCity}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-            input: `${newCity}`
-        })
     })
     .then(response => response.json())
     .then(data => {
         console.log('New update is made', data);
-        setTimeout(document.getElementById('editForm').style.display = "none", 2000);
-        // setTimeout(getInput, 1000)
+        document.getElementById('editForm').style.display = "none";
         getInput();
     });
 
