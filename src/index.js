@@ -36,11 +36,10 @@ function getStarted(){
 // call to the starmap
 /* <!--begin https://virtualsky.lco.global/ --> */
 let planetarium;
-function positionStarMap(data2){
-    if(data2 != null){
-        let latitude = data2.results[0].locations[0].displayLatLng.lat;
-        let longitude =data2.results[0].locations[0].displayLatLng.lng;
-        console.log('Lat, Long', latitude, longitude);
+function positionStarMap(dataGet){
+    if(dataGet != null){
+        let latitude = dataGet.results[0].locations[0].displayLatLng.lat;
+        let longitude =dataGet.results[0].locations[0].displayLatLng.lng;
         S(document).ready(function() {
             planetarium = S.virtualsky({
                 'id': 'starmapper',
@@ -62,7 +61,7 @@ function positionStarMap(data2){
                 'showdate': false
             });
         });
-    } else if (data2 == null) {
+    } else if (dataGet == null) {
         S(document).ready(function() {
             planetarium = S.virtualsky({
                 id: 'starmapper',
@@ -89,9 +88,7 @@ function positionStarMap(data2){
 /* <!--eind https://virtualsky.lco.global/ --> */
 
 // post of new function
-function postInput(inputPlaces){
-    console.log('Plaats', inputPlaces);
-    
+function postInput(inputPlaces){    
     let header = new Headers();
     header.append("Content-Type", "application/json");
 
@@ -113,11 +110,10 @@ function postInput(inputPlaces){
 function getData(inputPlaces){
     fetch(`http://www.mapquestapi.com/geocoding/v1/address?key=${test2}&location=${inputPlaces}`)
     .then(response => response.json())
-    .then(data2 => {
+    .then(dataGet => {
         getIdWiki(inputPlaces)
-        //testApi(data2, inputPlaces);
-        positionStarMap(data2);
-        getWeather(data2, inputPlaces);                               // doorgeven van data naar getWeather functie
+        positionStarMap(dataGet);
+        getWeather(dataGet, inputPlaces);                               // doorgeven van data naar getWeather functie
                                                                       // Beter niet boven in window.onload function -> anders wordt het 2x uitgevoerd
 
     })
@@ -128,19 +124,18 @@ function getIdWiki(inputPlaces){
     fetch(`https://www.wikidata.org/w/api.php?action=wbgetentities&sites=enwiki&titles=${inputPlaces}&format=json`)
     .then(response => response.json())
     .then(dataWiki => {
-        console.log('Wiki Id Nummer',dataWiki);
 
         /*https://www.youtube.com/watch?v=RPz75gcHj18 begin*/
         console.log('Get entitie',Object.keys(dataWiki.entities));
         let idInput = Object.keys(dataWiki.entities)[0]
         /*https://www.youtube.com/watch?v=RPz75gcHj18 eind*/
 
-        getNearbyCities(idInput)
+        getNearbyCities(idInput, inputPlaces)
     })
 }
 
 // functie voor ophalen nabijgelegen cities
-function getNearbyCities(idInput){
+function getNearbyCities(idInput, inputPlaces){
     fetch(`https://wft-geo-db.p.rapidapi.com/v1/geo/cities/${idInput}/nearbyCities?radius=100&types=CITY`, {
         "method": "GET",
         "headers": {
@@ -150,63 +145,61 @@ function getNearbyCities(idInput){
     })
     .then(response => response.json())
     .then(nearbyPlaces => {
-        console.log('Data nearby place', nearbyPlaces.data);
         let nearest = nearbyPlaces.data
         nearest.forEach(weatherPlaces => {
             console.log(weatherPlaces);
             let latWiki=weatherPlaces.latitude;
             let lonWiki=weatherPlaces.longitude;
-            console.log('testen', latWiki, lonWiki);
-            // const coordinateLat = test.map(obj => obj.latitude);
-            // const coordinateLon = test.map(obj => obj.latitude);
 
             fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latWiki}&lon=${lonWiki}&appid=${test1}&units=metric`)
             .then(response => response.json())
             .then(dataPlaces => {
-                console.log('Weather data', dataPlaces);
-
-                /* begin https://stackoverflow.com/questions/847185/convert-a-unix-timestamp-to-time-in-javascript/847196#847196*/
-                let unix_timestamp = dataPlaces.current.dt;
-                let date = new Date(unix_timestamp * 1000);
-                let hours = date.getHours();
-                let minutes = "0" + date.getMinutes;
-                let formattedTime = hours + ':' + minutes;
-                /* Eind https://stackoverflow.com/questions/847185/convert-a-unix-timestamp-to-time-in-javascript/847196#847196*/
-
-                if (dataPlaces.current.weather[0].main == "Clear"){
-                    let containerNearestPlace = document.getElementById('placeToSeeStars').innerHTML = `
-                        <div id="weatherNearestPlace">
-                            <h1 id="nearestPlace">Nearest place to see stars:</h1>
-                            <div id="ContainerAllInfoNearest">
-                                <div id="locatieTimeNearest">
-                                    <h2 id="locationNearbyCity">${inputPlaces}</h2>
-                                    <p id="clockNearest">${formattedTime}</p>
-                                </div>
-                                <div id="columnTextNearest">
-                                    <p id="temperature">${dataPlaces.current.temp}°C</pv>
-                                    <div id="conditionWeatherNearest">
-                                        <img class="iconWeatherNearest" src="http://openweathermap.org/img/wn/${dataPlaces.current.weather[0].icon}.png" alt="icon-weather-condition">
-                                        <p id="weatherConditionNameNearest">${dataPlaces.current.weather[0].description}</p>
+                console.log('Weather data Nearby', dataPlaces);
+                for (let i = 0; i<=1; i++){
+                    /* begin https://stackoverflow.com/questions/847185/convert-a-unix-timestamp-to-time-in-javascript/847196#847196*/
+                    let unix_timestamp = dataPlaces.current.dt;
+                    let date = new Date(unix_timestamp * 1000);
+                    let hours = date.getHours();
+                    let minutes = "0" + date.getMinutes();
+                    let formattedTime = hours + ':' + minutes;
+                    /* Eind https://stackoverflow.com/questions/847185/convert-a-unix-timestamp-to-time-in-javascript/847196#847196*/
+    
+                    if (dataPlaces.current.weather[0].main == "Clear"){
+                        let containerNearestPlace = document.getElementById('placeToSeeStars').innerHTML = `
+                            <div id="weatherNearestPlace">
+                                <h1 id="nearestPlace">Nearest place to see stars:</h1>
+                                <div id="ContainerAllInfoNearest">
+                                    <div id="locatieTimeNearest">
+                                        <h2 id="locationNearbyCity">${inputPlaces}</h2>
+                                        <p id="clockNearest">${formattedTime}</p>
                                     </div>
-                                    <div class="arrow"></div>
+                                    <div id="columnTextNearest">
+                                        <p id="temperature">${dataPlaces.current.temp}°C</pv>
+                                        <div id="conditionWeatherNearest">
+                                            <img class="iconWeatherNearest" src="http://openweathermap.org/img/wn/${dataPlaces.current.weather[0].icon}.png" alt="icon-weather-condition">
+                                            <p id="weatherConditionNameNearest">${dataPlaces.current.weather[0].description}</p>
+                                        </div>
+                                        <div class="arrow"></div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>`;
-                } else if(dataPlaces.current.weather[0].main != "Clear"){
-                    let containerNearestPlace = document.getElementById('placeToSeeStars').innerHTML = `
-                        <div id="weatherNoNearestPlace">
-                            <h2 id="noNearestPlace">There is no nearest place with clear sky at this moment</h1>`;
+                            </div>`;
+                    } else if(dataPlaces.current.weather[0].main != "Clear"){
+                        let containerNearestPlace = document.getElementById('placeToSeeStars').innerHTML = `
+                            <div id="weatherNoNearestPlace">
+                                <h2 id="noNearestPlace">There is no nearest place with clear sky at this moment</h1>`;
+                    }
                 }
+
             });
         });
     });    
 }
 
 // ophalen van het weer voor ingegeven plaats
-function getWeather(data2, inputPlaces){
+function getWeather(dataGet, inputPlaces){
 
-    let lat = data2.results[0].locations[0].displayLatLng.lat;       //ophalen data voor de latitude
-    let lon = data2.results[0].locations[0].displayLatLng.lng;       // ophalen data voor de longitude
+    let lat = dataGet.results[0].locations[0].displayLatLng.lat;       //ophalen data voor de latitude
+    let lon = dataGet.results[0].locations[0].displayLatLng.lng;       // ophalen data voor de longitude
     
     fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${test1}&units=metric`)
     .then(response => response.json())

@@ -18,15 +18,12 @@ window.onload = function () {
         if (cityId && e.target.className.indexOf('edit') !== -1) {
             console.log('Edit')
             document.getElementById('editForm').style.display = "block";
-            
-            //TODO add current city name to inputfield   
-
         } 
 
         // Voor delete
         if (cityId && e.target.className.indexOf('trash') !== -1) {
             console.log('trash')
-            console.log('deleted id', cityId);
+            deleteFun()
         }
 
     });
@@ -56,8 +53,8 @@ async function getInput() {
 
 }
 
-function submitChange(event) {
-    event.preventDefault();
+function submitChange(e) {
+    e.preventDefault();
     console.log('edit the city');
     console.log("Test meegeven id", cityId);
     let newCity = document.getElementById('editCity').value
@@ -70,10 +67,21 @@ function submitChange(event) {
         },
     })
     .then(response => response.json())
-    .then(data => {
-        console.log('New update is made', data);
+    .then(dataPut => {
+        console.log('New update is made', dataPut);
         document.getElementById('editForm').style.display = "none";
         getInput();
     });
 
+}
+
+function deleteFun(){
+    fetch(`https://sterrenkijker.herokuapp.com/deleteInput/${cityId}`, {
+        method: 'DELETE'
+    })
+    .then(response => response.json())
+    .then(dataDel => {
+        console.log('deleted id', dataDel);
+        getInput();
+    });
 }
