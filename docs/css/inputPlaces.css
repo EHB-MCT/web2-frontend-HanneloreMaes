@@ -1,16 +1,25 @@
 body{
 	margin: 0;
 	width: 100%;
+	background-image: url('../img/61bf0ff44488f.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 * { 
 	font-family: Helvetica, sans-serif;
-	color: black;
+	color: white;
 	font-size: 1em;
 }
 
 h1{
     font-size: 30pt;
 	padding: 0% 2%;
+}
+h2{
+	font-size: 19pt;
+	color: white;
+	top: 0%;
+	margin-bottom: 0%;
 }
 
 #savedContainer{
@@ -36,7 +45,7 @@ h1{
     width: 30%;
 }
 
-#backHome{
+#backHome, #submitCity, #edit, #delete{
 	margin: 0;
 	/*https://getcssscan.com/css-buttons-examples begin*/
 	background-color: #e4eef5 ;
@@ -51,4 +60,12 @@ h1{
 	text-decoration: none;
 	/*https://getcssscan.com/css-buttons-examples eind*/
     margin: 1% 2% 1% 1%;
+}
+
+.fas{
+	color: #0f1021;
+}
+
+#editForm{
+	margin: 1% 2% 1% 2%;
 }

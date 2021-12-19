@@ -24,6 +24,7 @@ function getStarted(){
         document.getElementById('mainMap').style.display = "none"; 
         document.getElementById('showIndex').style.display = "block";
     })
+
     let showBack = document.getElementById('showIndex');
     showBack.addEventListener('click', e => {
         e.preventDefault();
@@ -155,7 +156,6 @@ function getNearbyCities(idInput, inputPlaces){
             .then(response => response.json())
             .then(dataPlaces => {
                 console.log('Weather data Nearby', dataPlaces);
-                for (let i = 0; i<=1; i++){
                     /* begin https://stackoverflow.com/questions/847185/convert-a-unix-timestamp-to-time-in-javascript/847196#847196*/
                     let unix_timestamp = dataPlaces.current.dt;
                     let date = new Date(unix_timestamp * 1000);
@@ -170,7 +170,7 @@ function getNearbyCities(idInput, inputPlaces){
                                 <h1 id="nearestPlace">Nearest place to see stars:</h1>
                                 <div id="ContainerAllInfoNearest">
                                     <div id="locatieTimeNearest">
-                                        <h2 id="locationNearbyCity">${inputPlaces}</h2>
+                                        <h2 id="locationNearbyCity">${weatherPlaces.name}</h2>
                                         <p id="clockNearest">${formattedTime}</p>
                                     </div>
                                     <div id="columnTextNearest">
@@ -179,7 +179,6 @@ function getNearbyCities(idInput, inputPlaces){
                                             <img class="iconWeatherNearest" src="http://openweathermap.org/img/wn/${dataPlaces.current.weather[0].icon}.png" alt="icon-weather-condition">
                                             <p id="weatherConditionNameNearest">${dataPlaces.current.weather[0].description}</p>
                                         </div>
-                                        <div class="arrow"></div>
                                     </div>
                                 </div>
                             </div>`;
@@ -188,10 +187,8 @@ function getNearbyCities(idInput, inputPlaces){
                             <div id="weatherNoNearestPlace">
                                 <h2 id="noNearestPlace">There is no nearest place with clear sky at this moment</h1>`;
                     }
-                }
-
+                });
             });
-        });
     });    
 }
 
