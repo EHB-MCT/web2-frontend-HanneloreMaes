@@ -77,7 +77,10 @@ function submitChange(e) {
 
 function deleteFun(){
     fetch(`https://sterrenkijker.herokuapp.com/deleteInput/${cityId}`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
     })
     .then(response => response.json())
     .then(dataDel => {
