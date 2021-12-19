@@ -160,8 +160,8 @@ function getNearbyCities(idInput, inputPlaces){
                     let unix_timestamp = dataPlaces.current.dt;
                     let date = new Date(unix_timestamp * 1000);
                     let hours = date.getHours();
-                    let minutes = "0" + date.getMinutes();
-                    let formattedTime = hours + ':' + minutes;
+                    let minutes = (date.getMinutes()<10?'0':'') + date.getMinutes();
+                    let formattedTime = hours + ':' + '0' + minutes;
                     /* Eind https://stackoverflow.com/questions/847185/convert-a-unix-timestamp-to-time-in-javascript/847196#847196*/
     
                     if (dataPlaces.current.weather[0].main == "Clear"){
