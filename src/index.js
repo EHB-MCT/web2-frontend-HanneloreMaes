@@ -161,7 +161,7 @@ function getNearbyCities(idInput, inputPlaces){
                     let date = new Date(unix_timestamp * 1000);
                     let hours = date.getHours();
                     let minutes = (date.getMinutes()<10?'0':'') + date.getMinutes();
-                    let formattedTime = hours + ':' + '0' + minutes;
+                    let formattedTime = hours + ':' + minutes;
                     /* Eind https://stackoverflow.com/questions/847185/convert-a-unix-timestamp-to-time-in-javascript/847196#847196*/
     
                     if (dataPlaces.current.weather[0].main == "Clear"){
@@ -214,7 +214,7 @@ function getWeather(dataGet, inputPlaces){
                     setInterval(() => {
                         let time = new Date();
                         let hour = time.getHours();
-                        let minutes2 = time.getMinutes();
+                        let minutes2 = (time.getMinutes()<10?'0':'') + time.getMinutes();
                         
                         let container = document.getElementById('current-time');
                         container.innerHTML = hour + ':' + minutes2
@@ -240,10 +240,10 @@ function getWeather(dataGet, inputPlaces){
 
             /* begin https://stackoverflow.com/questions/847185/convert-a-unix-timestamp-to-time-in-javascript/847196#847196*/
             let unix_timestamp = weather.dt;
-            let date = new Date(unix_timestamp * 1000);
-            let hours2 = date.getHours()+1;
-            let minutes = "0" + date.getMinutes();
-            let formattedTime2 = hours2 + ':' + minutes.substr(-2);
+            let date2 = new Date(unix_timestamp * 1000);
+            let hours2 = date2.getHours()+1;
+            let minutes = (date2.getMinutes()<10?'0':'') + date2.getMinutes();
+            let formattedTime2 = hours2 + ':' + minutes;
             /* Eind https://stackoverflow.com/questions/847185/convert-a-unix-timestamp-to-time-in-javascript/847196#847196*/
             
             let containerMenuRight = document.getElementById('weatherRightMenu');
