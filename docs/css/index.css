@@ -6,7 +6,7 @@ body{
 }
 * { 
 	font-family: 'Lato', sans-serif;
-	color: black;
+	color: #070524;
 	font-size: 1em;
 }
 div{
@@ -31,14 +31,13 @@ a:link {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background-color: rgba(0,0,0,0.5);
+	background-color: #111a55;
 	z-index: 2;
 	cursor: pointer;
 }
 #starmapper {
 	overflow: hidden;
 	position: relative;
-	/* display: flex; */
 	height: 100vh;
 	width: 100%;
 	margin: 0;
@@ -49,7 +48,7 @@ a:link {
 	font-size: 12px;
 	display:none;
 	background-color:rgba(200,200,200,1);
-	color:black;
+	color:#070524;
 	padding:5px;
 	max-width:150px;
 	border-radius:0.5em;
@@ -115,7 +114,7 @@ a:link {
 	background-color: #e4eef5 ;
 	border: 0;
 	border-radius: 12px;
-	color: #0f1021;
+	color: #070524;
 	cursor: pointer;
 	display: inline-block;
 	font-size: 1em;
@@ -132,7 +131,7 @@ a:link {
 	background-color: #e4eef5 ;
 	border: 0;
 	border-radius: 12px;
-	color: #0f1021;
+	color: #070524;
 	cursor: pointer;
 	line-height: 2.5;
 	outline: transparent;
@@ -384,7 +383,7 @@ a:link {
 	width: 10px;
 }
 ::-webkit-scrollbar-thumb {
-	background: gray;
+	background: white;
 	border-radius: 15px;
 }
 
