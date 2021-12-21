@@ -109,7 +109,7 @@ function postInput(inputPlaces){
 
 //ophalen van data voor lat en long van inputPlaces
 function getData(inputPlaces){
-    fetch(`http://www.mapquestapi.com/geocoding/v1/address?key=${test2}&location=${inputPlaces}`)
+    fetch(`https://www.mapquestapi.com/geocoding/v1/address?key=${test2}&location=${inputPlaces}`)
     .then(response => response.json())
     .then(dataGet => {
         getIdWiki(inputPlaces)
