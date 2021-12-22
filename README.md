@@ -1,3 +1,8 @@
+!!NOTE!!
+To search for a big city like Antwerpen, you need to write it in english
+Antwerpen -> Antwerp
+
+
 Hieronder vind je de sources die ik gebruikt heb voor dit project:
 
 1.  Api documentation:
