@@ -262,6 +262,7 @@ a:link {
 	color: white;
 	font-size: 16pt;
 	font-weight: 400;
+	margin-right: 5%;
 }
 #weatherConditionName{
 	display: inline;
