@@ -122,7 +122,8 @@ function getData(inputPlaces){
 
 // ophalen van id voor api gebruik om nabijgelegen cities te zoeken
 function getIdWiki(inputPlaces){
-    fetch(`https://www.wikidata.org/w/api.php?action=wbgetentities&sites=enwiki&titles=${inputPlaces}&format=json`)
+
+    fetch(`https://www.wikidata.org/w/api.php?action=wbgetentities&sites=enwiki&titles=${inputPlaces}&format=json&origin=*`)
     .then(response => response.json())
     .then(dataWiki => {
 
