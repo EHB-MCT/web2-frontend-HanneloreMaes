@@ -4,7 +4,7 @@ body{
 	margin: 0;
 	width: 100%;
 	background-image: url('../img/61bf0ff44488f.jpg');
-	background-repeat: no-repeat;
+	background-repeat: repeat;
 	background-size: cover;
 }
 * { 
