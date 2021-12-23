@@ -59,3 +59,7 @@ Hieronder vind je de sources die ik gebruikt heb voor dit project:
 11. CORS documentation wikidata api
         Wikipedia website
         https://www.mediawiki.org/wiki/API:Cross-site_requests#CORS_usage        
+
+12. Uppercase to all input
+        Stackoverflow                   author: Steve Harrison
+        https://stackoverflow.com/questions/1026069/how-do-i-make-the-first-letter-of-a-string-uppercase-in-javascript
