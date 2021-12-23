@@ -55,3 +55,7 @@ Hieronder vind je de sources die ik gebruikt heb voor dit project:
 10. Getting a 0 by minutes under 10
         developer Mozilla 
         https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator
+
+11. CORS documentation wikidata api
+        Wikipedia website
+        https://www.mediawiki.org/wiki/API:Cross-site_requests#CORS_usage        
