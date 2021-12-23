@@ -13,7 +13,12 @@ function getStarted(){
     let submitForm = document.getElementById('searchform');
     submitForm.addEventListener("submit", e => {
         e.preventDefault();
-        let inputPlaces = document.getElementById("inputPlace").value;
+        let inputPlace = document.getElementById("inputPlace").value;
+        
+        /*https://stackoverflow.com/questions/1026069/how-do-i-make-the-first-letter-of-a-string-uppercase-in-javascript begin*/
+        let inputPlaces = inputPlace.charAt(0).toUpperCase() + inputPlace.slice(1);
+        /*https://stackoverflow.com/questions/1026069/how-do-i-make-the-first-letter-of-a-string-uppercase-in-javascript eind*/
+
         getData(inputPlaces);
         postInput(inputPlaces);
     });
